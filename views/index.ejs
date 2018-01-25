@@ -2,11 +2,11 @@
 
     <% include partials/header %>
     <h1>Add Customer</h1>
-    <% if (errors) { %>
+    <!-- <% if (errors) { %>
         <% errors.forEach(function(errors){ %>
             <li><%= errors.msg %></li>
        <% }) %>
-    <% } %>
+    <% } %> -->
     <form name="form1" method="POST" action="users/add">
         <input type="text" name="name" placeholder="Name">
         <input type="text" name="age" placeholder="Age">

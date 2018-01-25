@@ -72,26 +72,26 @@ app.post('/users/add',function(req,res){
     console.log("form submitted");
 
     // setting express validation rules of epress-validator
-    request.checkBody('name','Name is Required').notEmpty;
-    request.checkBody('age','Age is Required').notEmpty;
+    // request.checkBody('name','Name is Required').notEmpty;
+    // request.checkBody('age','Age is Required').notEmpty;
 
-    var errors = req.validationErrors();
+    // var errors = req.validationErrors();
 
-    if(errors){
-        res.render('index',{
-            title:'customer',
-            users : people,
-            error: errors
-        });
-    }
-    else{
+    // if(errors){
+    //     res.render('index',{
+    //         title:'customer',
+    //         users : people,
+    //         error: errors
+    //     });
+    // }
+    // else{
         var newUser= {
             name: req.body.name,
             age: req.body.age
         }
-        console.log(Done);
+        console.log("Done");
 
-    }
+    // }
 
     
 });
