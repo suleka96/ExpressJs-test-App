@@ -4,7 +4,7 @@ var path = require ('path');
 var expressValidator =require('express-validator');
 var mongojs = require('mongojs')
 var db = mongojs('customerApp', ['users'])
-
+var ObjectId = mongojs.ObjectId;
 var app = express();
 
 //middleware should always come before the route handlers
@@ -111,6 +111,17 @@ app.post('/users/add',function(req,res){
     // }
 
     
+});
+
+app.delete('/users/delete/:id', function(req,res){
+    db.users.remove({_id: ObjectId(req.params.id)},function(error){
+        if(error){
+            console.log(error);
+        }
+        else{
+            res.redirect('/');
+        }
+    });
 });
 
 //route handler
