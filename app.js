@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require ('path');
 var expressValidator =require('express-validator');
+var mongojs = require('mongojs')
+var db = mongojs('customerApp', ['users'])
 
 var app = express();
 
@@ -61,11 +63,18 @@ var people =[
 
 //route handler - rendering view engine views
 app.get('/',function(req,res){
+
+    db.users.find(function (err, docs) {
+        // docs is an array of all the documents in mycollection
+       // console.log(users);
+        res.render('index',{
+            title:'customer',
+            users : docs
+        });
+    })
+
     var title ='customer';
-    res.render('index',{
-        title:'customer',
-        users : people
-    });
+    
 });
 
 app.post('/users/add',function(req,res){
@@ -90,6 +99,14 @@ app.post('/users/add',function(req,res){
             age: req.body.age
         }
         console.log("Done");
+        db.users.insert(newUser, function(err,req){
+            if(err){
+                console.log("error");
+            }
+            else{
+                res.redirect('/');
+            }
+        })
 
     // }
 
